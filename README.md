@@ -2,6 +2,8 @@
 A simple way to bootstrap a bunch of VMs on a libvirt host. Gives more control
 than quickstart in some cases.
 
+[Cheat Sheet](CHEAT.md)
+
 ## Specs
 It is expected to run the following resources:
 - 1 undercloud
