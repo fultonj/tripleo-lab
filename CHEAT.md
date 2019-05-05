@@ -40,3 +40,7 @@ ansible -i inventory.yaml -m ping builder
 ansible-playbook -i inventory.yaml builder.yaml --skip-tags validations,metrics
 ```
 
+## Destroy it
+```
+sudo /usr/local/bin/lab-destroy
+```
