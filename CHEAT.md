@@ -8,16 +8,29 @@ git clone git@github.com:fultonj/tripleo-lab.git
 cd tripleo-lab
 ```
 
-## Update it with the latest from upstream
+## Update my fork's master from upstream
 
 - Add remote from original repository in my forked repository:
 ```
+git checkout master
 git remote add upstream git://github.com/cjeanner/tripleo-lab.git
 git fetch upstream
 ```
 - Update my fork from original repo to keep up with changes:
 ```
 git pull upstream master
+git push
+```
+
+## Update my branch from latest master
+- Review changes to be applied (excluding docs)
+```
+git diff master fultonj  -- . ':(exclude)*.md'
+```
+- Resolve conflicts manually during rebase.
+```
+git checkout fultonj
+git rebase -i master
 git push
 ```
 
