@@ -31,7 +31,10 @@ git diff master fultonj  -- . ':(exclude)*.md'
 ```
 git checkout fultonj
 git rebase -i master
+<<<<<<< HEAD
 git pull
+=======
+>>>>>>> 93e0c6d... update cheatsheet headers
 git push
 ```
 
