@@ -12,6 +12,8 @@
     - git
     - tmux
     - vim
+    - ceph-ansible
+    - emacs-nox
 
 - name: install tripleo client
   package:
