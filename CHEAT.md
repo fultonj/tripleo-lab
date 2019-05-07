@@ -38,8 +38,13 @@ git push
 ## Use it
 ```
 ssh-add -l
+
 ansible -i inventory.yaml -m ping builder
-ansible-playbook -i inventory.yaml builder.yaml -e @environments/podman.yaml --skip-tags validations,metrics
+
+ansible-playbook -i inventory.yaml builder.yaml \
+-e @environments/podman.yaml \
+-e @environments/disk-cleaning.yaml \
+--skip-tags validations,metrics
 ```
 
 ## Destroy it
