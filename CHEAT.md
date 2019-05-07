@@ -31,6 +31,7 @@ git diff master fultonj  -- . ':(exclude)*.md'
 ```
 git checkout fultonj
 git rebase -i master
+git pull
 git push
 ```
 
