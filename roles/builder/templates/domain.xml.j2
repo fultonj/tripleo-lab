@@ -36,7 +36,7 @@
     <disk type='file' device='disk'>
       <driver name='qemu' type='raw'/>
       <source file='{{basedir}}/workload/{{vm_prefix}}-oc{{item.1}}-{{item.0.name}}-osd-{{osd}}.img'/>
-      <target dev='hd{{letters[osd]}}'/>
+      <target dev='sd{{letters[osd]}}'/>
     </disk>
     {% endfor %}
     {% endif %}
