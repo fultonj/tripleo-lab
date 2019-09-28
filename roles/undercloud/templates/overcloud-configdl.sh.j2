@@ -7,7 +7,7 @@ stdbuf -i0 -o0 -e0 openstack tripleo container image prepare \
 
 stdbuf -i0 -o0 -e0 openstack overcloud deploy \
   --templates /usr/share/openstack-tripleo-heat-templates/ \
-  --stack overcloud-{{ item }} \
+  --stack overcloud-{{ item }} --stack-only \
   -n /home/stack/oc{{ item }}-network-data.yaml \
   -e /usr/share/openstack-tripleo-heat-templates/environments/net-multiple-nics.yaml \
   -e /usr/share/openstack-tripleo-heat-templates/environments/network-isolation.yaml \
@@ -29,11 +29,13 @@ stdbuf -i0 -o0 -e0 openstack overcloud deploy \
   -e /home/stack/domain.yaml \
   -e /home/stack/containers-env-file.yaml \
   --environment-directory ~/overcloud-{{ item }}-yml \
-  --ntp-server pool.ntp.org --libvirt-type qemu 2>&1 | tee -a ~/install-overcloud-{{ item }}.log
-ret_val=$?
+  --ntp-server pool.ntp.org --libvirt-type qemu 2>&1 | tee -a ~/config-download-oc{{ item }}.log
 
-if [ $ret_val -ne 0 ] && [ -n $1 ] && [ "$1" = '--delete-if-fail' ]; then
-  openstack overcloud delete overcloud-{{ item }} --yes
-fi
+tripleo-config-download --stack-name overcloud-{{ item }} --output-dir oc{{ item }}-config-download
+tripleo-ansible-inventory --ansible_ssh_user heat-admin --static-yaml-inventory oc{{ item }}-inventory.yaml --stack overcloud-{{ item }}
 
-exit $ret_val
+echo ansible-playbook \
+  -i oc{{ item }}-inventory.yaml \
+  --private-key /home/stack/.ssh/id_rsa \
+  --become \
+  oc{{ item }}-config-download/deploy_steps_playbook.yaml

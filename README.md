@@ -281,3 +281,22 @@ custom_repositories:
 
 *run_validations*
   Activate tempest runs (bool, default yes)
+
+*modify_container*
+  List projects/container to modify on the fly during a standalone deploy.
+```YAML
+modify_container:
+  gerrit-project-name:
+    ref: change reference
+    container: container-name
+```
+For instance:
+```YAML
+modify_container:
+  neutron:
+    ref: refs/changes/60/661760/7
+    container: neutron-server
+```
+
+*num_osds*
+  The number of OSD disks created per ceph node (int, default 1)
